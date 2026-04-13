@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phishing Simulation Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Styles for the new Start Screen */
+    #start { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: lightsalmon; color: #eee; 
+      z-index: 2000;
+    }
+    #start button { padding: 1em 2em; margin: 0.5em; background: #222; color: #fff; border: none; cursor: pointer; border-radius: 4px; }
+    #start button:focus { outline: 2px solid #0f0; }
+    .center-img { display: flex; margin: 10px auto; border-radius: 8px; }
+  </style>
+
+  <script>
+    window.SCENARIOS = [
+      {
+        id: 1,
+        sender: "byu@service-now.com",
+        subject: "Upcoming Service Opportunities and Community Engagement",
+        body: "Dear Student,\n\nAs we look forward to the coming weeks, there are several meaningful ways to get involved...",
+        linkText: "https://yserve.byu.edu/",
+        isPhishing: false
+      },
+      {
+        id: 2,
+        sender: "info@accountt.netflix.com",
+        subject: "Urgent: Unusual Login Detected",
+        body: "Our system detected an unusual login attempt on your account. Please verify your account immediately to secure your information.",
+        linkText: "http://account-verification-portal.com/login",
+        isPhishing: true
+      },
+      {
+        id: 3,
+        sender: "cz-reply@amazon.com",
+        subject: "Package Shipped: Shipping Issue Detected",
+        body: "Hello,,\n\nPlease find the attached link regarding the issue encountered with your recent order.",
+        linkText: "https://amason.com/view",
+        isPhishing: true
+      },
+      {
+        id: 4,
+        sender: "support@banking-service.com",
+        subject: "Security Alert: Unauthorized Access Attempt",
+        body: "We have detected an unauthorized access attempt on your account. Please click the link below to review your account activity and secure your information immediately.",
+        linkText: "https://banking-service.com/security-alert",
+        isPhishing: true
+      },
+      {
+        id: 5,
+        sender: "noreply@nps.gov",
+        subject: "Explore Your Parks: Upcoming Events and Volunteer Opportunities",
+        body: "Dear Outdoor Enthusiast,\n\nWe are excited to share several upcoming events and programs happening across our National Parks this season...",
+        linkText: "https://www.nps.gov/subjects/events/calendar.htm",
+        isPhishing: false
+      }
+    ];
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="start">
+    <h1>Something Smells Phishy!</h1>
+    <h2>The Phishing Game</h2>
+    <img src="ryangoslingfishing.jfif" width="400" class="center-img">
+    <button id="startButton">Start</button>
+    <button id="instructionButton">Instructions</button>
+  </div>
+
+  <div id="gameContainer" style="display:none;">
+    <h1>Phishing Simulation</h1>
+    <div id="progress">
+      Scenario <span id="currentIndex">1</span> of <span id="totalScenarios">5</span>
+    </div>
+
+    <div id="emailArea" class="email-window">
+      <div class="email-header">
+        <span id="emailFrom">From: [Loading...]</span>
+        <span id="emailSubject">Subject: [Loading...]</span>
+      </div>
+      <p id="emailBody" style="white-space: pre-wrap;">[Loading email content...]</p>
+      <a href="#" id="emailLink" class="phish-link" target="_blank">[Link]</a>
+    </div>
+
+    <div id="actions">
+      <button id="clickButton" class="btn">Click Link</button>
+      <button id="reportButton" class="btn">Report Phishing</button>
+    </div>
+
+    <div id="feedback" class="feedback" style="display:none;"></div>
+  </div>
+</body>
+</html>
